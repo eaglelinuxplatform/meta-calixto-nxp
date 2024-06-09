@@ -35,5 +35,7 @@ do_install() {
 }
 
 do_deploy() {
-	cp ${WORKDIR}/create-sdcard-boot.sh ${DEPLOY_DIR_IMAGE}/
+	cp -p ${WORKDIR}/create-sdcard-boot.sh ${DEPLOY_DIR_IMAGE}/
 }
+
+

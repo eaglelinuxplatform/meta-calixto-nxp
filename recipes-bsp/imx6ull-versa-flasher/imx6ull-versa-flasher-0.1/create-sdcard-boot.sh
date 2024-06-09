@@ -236,11 +236,21 @@ EOM
 # Check the version of sfdisk installed on your pc is atleast 2.26.x or newer.
 # & As per the ubuntu v20.04 the sfdisk version is 2.37.2
 #-------------------------------------------------------------------------------
-if sfdisk -v | grep "2.37.2"
+#!/bin/bash
+
+currentver_str="$(sfdisk -v)"
+currentver=$(sfdisk -v | awk {'print $NF'})
+echo "Current version of sfdisk : ${currentver}"
+requiredver="2.26.3"
+
+if [ "$(printf '%s\n' "$requiredver" "$currentver" | sort -V | head -n1)" = "$requiredver" ]; 
 then 
+echo "Greater than or equal to ${requiredver}"
 sfdisk ${DRIVE} << EOF
 1M,,L,*
 EOF
+else
+echo "Less than ${requiredver}"
 fi
 
 cat << EOM
@@ -293,7 +303,6 @@ EOM
 
 echo -e "\n\tCopying rootfs system partition\n"
 sudo tar -xf rootfs.tar -C $PATH_TO_SDROOTFS
-echo -e "\n\tKernel images copied\n"
 
 echo -e "\n\tSyncing...\n"
 sync
