@@ -293,6 +293,8 @@
 		>;
 	};
 
+	
+
 	pinctrl_flexcan2: flexcan2grp{
 		fsl,pins = <
 			MX6UL_PAD_UART2_RTS_B__FLEXCAN2_RX	0x1b020

@@ -12,13 +12,12 @@ addtask deploy before do_build after do_compile
 SRC_URI = "file://LICENSE \
 	   file://create-sdcard-boot.sh \
 	   file://flash_emmc.sh \
-	   file://interfaces \
 "
 
 S = "${WORKDIR}"
 
 FILES_${PN} = "${sysconfdir}/flash_emmc.sh \
-               ${sysconfdir}/network/interfaces \
+            
 "
 
 do_compile () {
@@ -26,12 +25,8 @@ do_compile () {
 }
 
 do_install() {
-	install -d ${D}${sysconfdir}/
-	install -d ${D}${sysconfdir}/network/
-	
-	install -m 0755 ${WORKDIR}/flash_emmc.sh ${D}${sysconfdir}/ 
-	install -m 0755 ${WORKDIR}/interfaces ${D}${sysconfdir}/network/
-	
+	install -d ${D}${sysconfdir}/	
+	install -m 0755 ${WORKDIR}/flash_emmc.sh ${D}${sysconfdir}/ 	
 }
 
 do_deploy() {
