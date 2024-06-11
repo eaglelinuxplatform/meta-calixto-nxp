@@ -157,13 +157,13 @@ echo "# Switch to Debian packaging and include package-management in the image" 
 echo "PACKAGE_CLASSES = \"package_deb\"" >> conf/local.conf
 echo "EXTRA_IMAGE_FEATURES += \"package-management\"" >> conf/local.conf
 
-echo ""
-echo " # Systemd packaging" >> conf/local.conf
-echo "DISTRO_FEATURES:append = \"systemd usrmerge\"" >> conf/local.conf
+echo "" >> conf/local.conf
+echo "# Systemd packaging" >> conf/local.conf
+echo "DISTRO_FEATURES:append = \" systemd usrmerge\"" >> conf/local.conf
 echo "DISTRO_FEATURES_BACKFILL_CONSIDERED += \"sysvinit\"" >> conf/local.conf
 echo "VIRTUAL-RUNTIME_init_manager = \"systemd\"" >> conf/local.conf
 echo "VIRTUAL-RUNTIME_initscripts = \"systemd-compat-units\"" >> conf/local.conf
-echo ""
+echo "" >> conf/local.conf
 
 if [ ! -e $BUILD_DIR/conf/bblayers.conf.org ]; then
     cp $BUILD_DIR/conf/bblayers.conf $BUILD_DIR/conf/bblayers.conf.org

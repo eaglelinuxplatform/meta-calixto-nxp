@@ -16,9 +16,7 @@ SRC_URI = "file://LICENSE \
 
 S = "${WORKDIR}"
 
-FILES_${PN} = "${sysconfdir}/flash_emmc.sh \
-            
-"
+FILES_${PN} = "${sysconfdir}/flash_emmc.sh"
 
 do_compile () {
 	:
