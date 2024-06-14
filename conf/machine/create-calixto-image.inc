@@ -1,16 +1,13 @@
-CALIXTO_IMG_PATH_COMMON = '${DEPOLY_DIR}/home/calixto-systems/yocto/calixto-images/${IMAGE_BASENAME}/${MACHINE}'
-CALIXTO_IMG_PATH_SDCARD = '${DEPOLY_DIR}/home/calixto-systems/yocto/calixto-images/${IMAGE_BASENAME}/${MACHINE}/sdcard'
+create_imx6ull_versa_image () {
 
-create_calixto_versa_image () {
+CALIXTO_IMAGE_PATH_SDCARD="${DEPLOY_DIR}/../../../calixto-images/${MACHINE}/sdcard"
 
-mkdir -p ${CALIXTO_IMG_PATH_COMMON}
-rm -rf ${CALIXTO_IMG_PATH_COMMON}/*
+mkdir -p ${CALIXTO_IMAGE_PATH_SDCARD}
+rm -rf ${CALIXTO_IMAGE_PATH_SDCARD}/*
 
-mkdir -p ${CALIXTO_IMG_PATH_SDCARD}
-rm -rf ${CALIXTO_IMG_PATH_SDCARD}/*
+cp -v ${DEPLOY_DIR_IMAGE}/u-boot.imx ${CALIXTO_IMAGE_PATH_SDCARD}/u-boot-dtb.imx
 
-cp -v ${DEPLOY_DIR_IMAGE}/"${PKGE}--${PKGV}-${PKGR}-${MACHINE}${IMAGE_VERSION_SUFFIX}" ${CALIXTO_IMG_PATH_SDCARD}/imx6ull-versa256.dtb
+cp ${DEPLOY_DIR}/../../../sources/meta-calixto-nxp/recipes-bsp/imx6ull-versa-flasher/imx6ull-versa-flasher-0.1/create-sdcard-boot.sh ${CALIXTO_IMAGE_PATH_SDCARD}
 
 }
-
 

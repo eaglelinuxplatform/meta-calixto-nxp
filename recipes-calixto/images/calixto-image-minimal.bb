@@ -18,3 +18,6 @@ CORE_IMAGE_EXTRA_INSTALL += "inetutils apmd"
 IMAGE_ROOTFS_SIZE ?= "8192"
 
 
+
+
+

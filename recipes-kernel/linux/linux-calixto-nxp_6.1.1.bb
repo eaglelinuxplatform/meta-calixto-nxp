@@ -37,8 +37,10 @@ do_configure:append() {
         dts_base="imx6ull-calixto-versa"
     fi
     
-
+    
     if ! grep -q "dtb-$(CONFIG_SOC_IMX6UL) += ${dts_base}.dtb" "${S}/arch/arm/boot/dts/Makefile"; then
         echo "dtb-$(CONFIG_SOC_IMX6UL) += ${dts_base}.dtb" >> "${S}/arch/arm/boot/dts/Makefile"
     fi
 }
+
+
