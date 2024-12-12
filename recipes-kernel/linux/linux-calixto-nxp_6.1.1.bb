@@ -12,6 +12,9 @@ SRC_URI += "file://defconfig \
 	   file://imx6ull-calixto-versa256.dts \
 	   file://imx6ull-calixto-versa512.dts \
 	   file://imx6ull-calixto-versa1024.dts \
+	   file://imx6ull-calixto-tiny256.dts \
+	   file://imx6ull-calixto-tiny512.dts \
+	   file://imx6ull-calixto-tiny1024.dts \
 "
 DEPENDS += "lzop-native"
 
@@ -23,24 +26,34 @@ SRCREV = "a7ea257716dde10fc501c7c32e3432f92ba13def"
 
 FILESEXTRAPATHS:append = "${THISDIR}/files:"
 
-do_configure:append() {  
-    if [ "${MACHINE}" = "imx6ull-versa256" ]; then    
+do_configure:append() {
+    if [ "${MACHINE}" = "imx6ull-versa256" ]; then
         cp ${WORKDIR}/imx6ull-calixto-versa256.dts ${WORKDIR}/git/arch/arm/boot/dts/imx6ull-calixto-versa.dts
-        dts_base="imx6ull-calixto-versa" 
-               
+        dts_base="imx6ull-calixto-versa"
+
     elif [ ${MACHINE} = "imx6ull-versa512" ]; then
         cp ${WORKDIR}/imx6ull-calixto-versa512.dts ${WORKDIR}/git/arch/arm/boot/dts/imx6ull-calixto-versa.dts
-        dts_base="imx6ull-calixto-versa" 
-               
+        dts_base="imx6ull-calixto-versa"
+
     elif [ ${MACHINE} = "imx6ull-versa1024" ]; then
         cp ${WORKDIR}/imx6ull-calixto-versa1024.dts ${WORKDIR}/git/arch/arm/boot/dts/imx6ull-calixto-versa.dts
         dts_base="imx6ull-calixto-versa"
+
+    elif [ ${MACHINE} = "imx6ull-tiny256" ]; then
+         cp ${WORKDIR}/imx6ull-calixto-tiny256.dts ${WORKDIR}/git/arch/arm/boot/dts/imx6ull-calixto-tiny.dts
+         dts_base="imx6ull-calixto-tiny"
+
+    elif [ ${MACHINE} = "imx6ull-tiny512" ]; then
+         cp ${WORKDIR}/imx6ull-calixto-tiny512.dts ${WORKDIR}/git/arch/arm/boot/dts/imx6ull-calixto-tiny.dts
+         dts_base="imx6ull-calixto-tiny"
+
+    elif [ ${MACHINE} = "imx6ull-tiny1024" ]; then
+         cp ${WORKDIR}/imx6ull-calixto-tiny1024.dts ${WORKDIR}/git/arch/arm/boot/dts/imx6ull-calixto-tiny.dts
+         dts_base="imx6ull-calixto-tiny"
     fi
-    
-    
+
     if ! grep -q "dtb-$(CONFIG_SOC_IMX6UL) += ${dts_base}.dtb" "${S}/arch/arm/boot/dts/Makefile"; then
         echo "dtb-$(CONFIG_SOC_IMX6UL) += ${dts_base}.dtb" >> "${S}/arch/arm/boot/dts/Makefile"
     fi
 }
-
 
