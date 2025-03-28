@@ -4,10 +4,10 @@ LICENSE = "CLOSED"
 LIC_FILES_CHKSUM = "file://${THISDIR}../../LICENSE.txt;md5=6e28714b0b646413afae7df29356aa93"
 
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
-UBOOT_SRC ?= "git://github.com/Anzal-calixto/uboot-imx-calixto.git;protocol=https"
-SRCBRANCH = "lf_v2024.04"
+UBOOT_SRC ?= "git://github.com/eaglelinuxplatform/calixto-nxp-uboot.git;protocol=https"
+SRCBRANCH = "2024.04"
 LOCALVERSION ?= "-${SRCBRANCH}"
-SRCREV = "1b18a0c9814b9c97701e8463cc87b9a0c27d8a61"
+SRCREV = "aea33596bd043be70c36261c9e1425716dfe0349"
 
 DEPENDS += " \
     bc-native \

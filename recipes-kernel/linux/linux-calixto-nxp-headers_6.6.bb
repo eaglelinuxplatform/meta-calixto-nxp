@@ -10,7 +10,7 @@ SRC_URI = "${LINUX_IMX_SRC}"
 LINUX_IMX_SRC ?= "git://github.com/eaglelinuxplatform/calixto-nxp-linux.git;protocol=https;branch=${SRCBRANCH}"
 SRCBRANCH = "6.6.y"
 LOCALVERSION = "-lts-${SRCBRANCH}"
-SRCREV = "c50b70616480f6e8a6cf7b48d5ffd535bd230083"
+SRCREV = "d382162cdcef7b279143ca5584a6069623775b57"
 
 S = "${WORKDIR}/git"
 

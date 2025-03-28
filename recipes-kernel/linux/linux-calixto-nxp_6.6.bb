@@ -14,7 +14,7 @@ LINUX_IMX_SRC ?= "git://github.com/eaglelinuxplatform/calixto-nxp-linux.git;prot
 SRCBRANCH = "6.6.y"
 KBRANCH = "${SRCBRANCH}"
 LOCALVERSION = "-lts-next"
-SRCREV = "ecaa84c029fdb7e6bf9599611403fd2f49ef7234"
+SRCREV = "d382162cdcef7b279143ca5584a6069623775b57"
 
 # PV is defined in the base in linux-imx.inc file and uses the LINUX_VERSION definition
 # required by kernel-yocto.bbclass.
@@ -50,6 +50,10 @@ do_configure:append(){
     # Check if MACHINE is "imx93-calixto-versa_1gb" and rename accordingly
     if [ "${MACHINE}" = "imx93-calixto-versa_1gb" ]; then
         original_dts="${kernel_dts_dir}/imx93-calixto-versa_1GB_NPU.dts"
+        new_dts="${kernel_dts_dir}/imx93-calixto-versa.dts"
+	dtb_filename="imx93-calixto-versa.dtb"
+    elif [ "${MACHINE}" = "imx93-calixto-versa_2gb" ]; then
+        original_dts="${kernel_dts_dir}/imx93-calixto-versa_2GB_NPU.dts"
         new_dts="${kernel_dts_dir}/imx93-calixto-versa.dts"
 	dtb_filename="imx93-calixto-versa.dtb"
 
