@@ -14,7 +14,7 @@ LINUX_IMX_SRC ?= "git://github.com/eaglelinuxplatform/calixto-nxp-linux.git;prot
 SRCBRANCH = "6.6.y"
 KBRANCH = "${SRCBRANCH}"
 LOCALVERSION = "-lts-next"
-SRCREV = "d382162cdcef7b279143ca5584a6069623775b57"
+SRCREV = "692299118593693d450dfd5fe54f0c47138bbcb3"
 
 # PV is defined in the base in linux-imx.inc file and uses the LINUX_VERSION definition
 # required by kernel-yocto.bbclass.
@@ -46,7 +46,9 @@ KBUILD_DEFCONFIG ?= "defconfig"
 do_configure:append(){
 
     kernel_dts_dir="${S}/arch/arm64/boot/dts/freescale"  # Adjust path as needed
+    kernel_arm32_dir="${S}/arch/arm/boot/dts/nxp/imx"
     makefile_path="${kernel_dts_dir}/Makefile"
+    arm32_makefile_path="${kernel_arm32_dir}/Makefile"
     # Check if MACHINE is "imx93-calixto-versa_1gb" and rename accordingly
     if [ "${MACHINE}" = "imx93-calixto-versa_1gb" ]; then
         original_dts="${kernel_dts_dir}/imx93-calixto-versa_1GB_NPU.dts"
@@ -56,7 +58,36 @@ do_configure:append(){
         original_dts="${kernel_dts_dir}/imx93-calixto-versa_2GB_NPU.dts"
         new_dts="${kernel_dts_dir}/imx93-calixto-versa.dts"
 	dtb_filename="imx93-calixto-versa.dtb"
-
+    elif [ "${MACHINE}" = "imx6ull-tiny1024" ]; then
+        original_dts="${kernel_arm32_dir}/imx6ull-calixto-tiny1024.dts"
+        new_dts="${kernel_arm32_dir}/imx6ull-calixto-tiny.dts"
+        dtb_filename="imx6ull-calixto-tiny.dtb"
+        arch32_flag=1
+    elif [ "${MACHINE}" = "imx6ull-tiny512" ]; then
+        original_dts="${kernel_arm32_dir}/imx6ull-calixto-tiny512.dts"
+        new_dts="${kernel_arm32_dir}/imx6ull-calixto-tiny.dts"
+        dtb_filename="imx6ull-calixto-tiny.dtb"
+	arch32_flag=1
+    elif [ "${MACHINE}" = "imx6ull-tiny256" ]; then
+        original_dts="${kernel_arm32_dir}/imx6ull-calixto-tiny256.dts"
+        new_dts="${kernel_arm32_dir}/imx6ull-calixto-tiny.dts"
+        dtb_filename="imx6ull-calixto-tiny.dtb"
+	arch32_flag=1
+    elif [ "${MACHINE}" = "imx6ull-versa1024" ]; then
+        original_dts="${kernel_arm32_dir}/imx6ull-calixto-versa1024.dts"
+        new_dts="${kernel_arm32_dir}/imx6ull-calixto-versa.dts"
+        dtb_filename="imx6ull-calixto-versa.dtb"
+	arch32_flag=1
+    elif [ "${MACHINE}" = "imx6ull-versa512" ]; then
+        original_dts="${kernel_arm32_dir}/imx6ull-calixto-versa512.dts"
+        new_dts="${kernel_arm32_dir}/imx6ull-calixto-versa.dts"
+        dtb_filename="imx6ull-calixto-versa.dtb"
+	arch32_flag=1
+    elif [ "${MACHINE}" = "imx6ull-versa256" ]; then
+        original_dts="${kernel_arm32_dir}/imx6ull-calixto-versa256.dts"
+        new_dts="${kernel_arm32_dir}/imx6ull-calixto-versa.dts"
+        dtb_filename="imx6ull-calixto-versa.dtb"
+	arch32_flag=1
     fi
 
     if [ -f "$original_dts" ]; then
@@ -66,10 +97,12 @@ do_configure:append(){
             echo "Warning: DTS file $original_dts not found"
     fi
 
-
-        # Append the DTB filename to the line with dtb-$(CONFIG_ARCH_MXC) +=
-    echo "dtb-\$(CONFIG_ARCH_MXC) += $dtb_filename" >> "$makefile_path"
-
+    if ["$arch32_flag" = "1"]; then
+	    echo "dtb-\$(CONFIG_SOC_IMX6UL) += $dtb_filename" >> "$arm32_makefile_path"
+	else
+            # Append the DTB filename to the line with dtb-$(CONFIG_ARCH_MXC) +=
+    	    echo "dtb-\$(CONFIG_ARCH_MXC) += $dtb_filename" >> "$makefile_path"
+    fi
 }
 # Use a verbatim copy of the defconfig from the linux-imx repo.
 # IMPORTANT: This task effectively disables kernel config fragments

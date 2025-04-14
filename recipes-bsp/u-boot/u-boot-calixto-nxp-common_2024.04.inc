@@ -7,7 +7,7 @@ SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
 UBOOT_SRC ?= "git://github.com/eaglelinuxplatform/calixto-nxp-uboot.git;protocol=https"
 SRCBRANCH = "2024.04"
 LOCALVERSION ?= "-${SRCBRANCH}"
-SRCREV = "aea33596bd043be70c36261c9e1425716dfe0349"
+SRCREV = "e2dba2fd3f7251ee46376bf48be817230d6478d9"
 
 DEPENDS += " \
     bc-native \
