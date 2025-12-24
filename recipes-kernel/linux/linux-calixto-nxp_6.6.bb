@@ -14,7 +14,7 @@ LINUX_IMX_SRC ?= "git://github.com/eaglelinuxplatform/calixto-nxp-linux.git;prot
 SRCBRANCH = "6.6.y"
 KBRANCH = "${SRCBRANCH}"
 LOCALVERSION = "-lts-next"
-SRCREV = "692299118593693d450dfd5fe54f0c47138bbcb3"
+SRCREV = "e0e632f71749a8bb908eed92bc283ff6d7f6a350"
 
 # PV is defined in the base in linux-imx.inc file and uses the LINUX_VERSION definition
 # required by kernel-yocto.bbclass.
