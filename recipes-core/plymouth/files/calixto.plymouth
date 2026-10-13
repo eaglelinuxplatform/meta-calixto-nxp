@@ -1,0 +1,9 @@
+[Plymouth Theme]
+Name=Calixto
+Description=Calixto Boot Splash
+ModuleName=script
+
+
+[script]
+ImageDir=/usr/share/plymouth/themes/calixto
+ScriptFile=/usr/share/plymouth/themes/calixto/calixto.script

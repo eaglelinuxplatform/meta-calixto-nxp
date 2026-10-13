@@ -1,0 +1,29 @@
+logo = Image("Calixto_splash.png");
+
+screen_w = Window.GetWidth();
+screen_h = Window.GetHeight();
+
+logo_w = logo.GetWidth();
+logo_h = logo.GetHeight();
+
+/* Desired maximum logo size relative to screen */
+max_logo_width  = screen_w * 0.45;
+max_logo_height = screen_h * 0.25;
+
+scale_x = max_logo_width / logo_w;
+scale_y = max_logo_height / logo_h;
+
+scale = Math.Min(scale_x, scale_y);
+
+logo = logo.Scale(
+    logo_w * scale,
+    logo_h * scale
+);
+
+sprite = Sprite(logo);
+
+sprite.SetPosition(
+    (screen_w - logo.GetWidth()) / 2,
+    (screen_h - logo.GetHeight()) / 2,
+    0
+);
